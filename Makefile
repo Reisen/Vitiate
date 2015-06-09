@@ -1,7 +1,7 @@
 
 build:
-	as src/hijack.s -o hijack.o
-	objcopy -j .text -O binary hijack.o hijack
+	as src/vitiate.s -o vitiate.o
+	objcopy -j .text -O binary vitiate.o vitiate
 
 d:
-	objdump -D hijack -b binary -m i386:x86-64
+	objdump -D vitiate -b binary -m i386:x86-64
