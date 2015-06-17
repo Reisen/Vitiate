@@ -19,12 +19,38 @@ cpuid_detect:
     # Extract CPU Feature Set.
     movq $1, %rax
     cpuid
-    movl %ecx, _feature(%rip)
+    movl %ecx, _features(%rip)
     retq
 
 
 cpuid_check:
-    # Confirm CPUID results.
+    # Track Indexes into Strings.
+    leaq _cpu0(%rip), %rcx
+    leaq _cpus(%rip), %rdx
+    decq %rdx
+
+    # Loop Through Results.
+    _cpuid_continue:
+    incq %rdx
+    cmpb $0, (%rdx)
+    jz _cpuid_fail
+
+    movb (%rcx), %al
+    cmpb %al, (%rdx)
+    jnz _cpuid_continue
+
+    incq %rcx
+    cmpb $0, (%rcx)
+    jnz _cpuid_continue
+
+    _cpuid_success:
+    testq $32, _features(%rip)
+    jz _cpuid_fail
+    movq $1, %rax
+    retq
+
+    _cpuid_fail:
+    movq $0, %rax
     retq
 
 
@@ -41,3 +67,4 @@ _cpu2:              .byte 0, 0, 0, 0
 _family:            .byte 0
 _features:          .byte 0, 0, 0, 0
 _cpus:              .string "AuthenticAMDGenuineIntel"
+                    .byte 0
