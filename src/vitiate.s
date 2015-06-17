@@ -34,6 +34,7 @@ _init:
 
     _init_fail:
     leaq _msg_cpuid_invalid(%rip), %rdi
+    callq subvert_cpu
     callq write
     callq quit
 
