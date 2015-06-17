@@ -1,6 +1,5 @@
 vitiate
 *.o
-*.ld
 *.bin
 tags
 *.out
