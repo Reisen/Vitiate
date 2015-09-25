@@ -34,4 +34,3 @@ int lseek() { return 0; }
 int read() { return 0; }
 void *gettimeofday() { return (void*)0; }
 void _exit() { }
-void _setjmp() {}

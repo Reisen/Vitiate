@@ -29,7 +29,8 @@ LDD := -L. -I$(MSL) -I. $(LIB)
 CXX := $(LDD) -std=c11 -Wall -fpie -pie
 
 base:
-	musl-gcc src/base.c $(CXX) -o base
+	as -c src/base.S -o base_asm.o
+	gcc base_asm.o src/base.c $(CXX) -o base
 
 
 .PHONY: clean

@@ -1,6 +1,3 @@
-#define __gnuc_va_list __builtin_va_list
-typedef int wint_t;
-
 #include "lua/lua.h"
 #include "lua/lualib.h"
 #include "lua/luadep.h"
