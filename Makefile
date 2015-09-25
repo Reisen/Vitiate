@@ -17,16 +17,19 @@ build: base
 
 LIB := \
 	-nostdlib \
-	-llua -Wl,-Bstatic \
+	-nodefaultlibs \
+	-Wl,-Bstatic \
+	-llua \
 	-lm \
-	-lc \
-	-Wl,-Bdynamic
+	-lg \
+	-lc
 
-MSL := /usr/lib/musl/lib/
-LDD := -L. -L$(MSLL) -I. $(LIB)
+MSL := newlib-cygwin/newlib/libc/include/
+LDD := -L. -I$(MSL) -I. $(LIB)
+CXX := $(LDD) -std=c11 -Wall -fpie -pie
 
 base:
-	musl-gcc $(LDD) src/base.c -o base
+	musl-gcc src/base.c $(CXX) -o base
 
 
 .PHONY: clean

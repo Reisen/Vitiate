@@ -12,5 +12,5 @@ SECTIONS
 
 MEMORY
 {
-    exec (rwx) : org = 0x8000, len = 0x8000
+    exec (rwx) : org = 0x8000, len = 0x100000
 }
