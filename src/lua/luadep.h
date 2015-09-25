@@ -15,10 +15,9 @@ __errno_location() {
 #undef stderr
 #undef stdout
 #undef stdin
-
 FILE *const stderr;
-FILE *const stdin;
 FILE *const stdout;
+FILE *const stdin;
 
 /* Functions Lua needs (that we don't). */
 size_t fopen64() { return 0; }
